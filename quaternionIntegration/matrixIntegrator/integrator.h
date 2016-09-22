@@ -2,7 +2,7 @@
 #include <trikKernel/timeVal.h>
 
 #include <QtCore/QObject>
-#include <QQuaternion>
+#include <QVector4D>
 
 class MatrixIntegrator : public QObject
 {
@@ -19,23 +19,23 @@ public slots:
 
 private:
 
-	double getRoll(const QQuaternion &q) const;
+	double getRoll(const QVector4D &q) const;
 
-	double getPitch(const QQuaternion &q) const;
+	double getPitch(const QVector4D &q) const;
 
-	double getYaw(const QQuaternion &q) const;
+	double getYaw(const QVector4D &q) const;
 
 	void showNavigation();
 
 	trikControl::BrickInterface &mBrick;
 
-	QQuaternion mQ;
-	QQuaternion mBias;
+	QVector4D mQ;
+	QVector4D mBias;
 
 	int mInitCount;
 	trikKernel::TimeVal mLastUpdate;
 
 	const int mGyroCalibrCount = 300;
 	const double mRadToDeg = 180.0 / M_PI;
-	const double mGyroRadToDeg = 0.07 / mRadToDeg; //(2000dps)
+	const double mGyroToRad = 0.07 / mRadToDeg; //(2000dps)
 };
